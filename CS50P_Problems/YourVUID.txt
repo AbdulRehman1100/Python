@@ -1,0 +1,8 @@
+# Nmap 7.99 scan initiated Fri Apr 24 20:15:11 2026 as: nmap -sS -oN YourVUID.txt -Pn --top-ports 100 44.228.249.3
+Nmap scan report for ec2-44-228-249-3.us-west-2.compute.amazonaws.com (44.228.249.3)
+Host is up (0.0050s latency).
+Not shown: 99 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+6001/tcp open  X11:1
+
+# Nmap done at Fri Apr 24 20:15:26 2026 -- 1 IP address (1 host up) scanned in 15.87 seconds

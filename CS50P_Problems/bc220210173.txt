@@ -1,0 +1,10 @@
+# Nmap 7.99 scan initiated Wed Apr 29 13:10:07 2026 as: nmap -sS -oN bc220210173.txt -Pn --top-ports 100 44.228.249.3
+Nmap scan report for ec2-44-228-249-3.us-west-2.compute.amazonaws.com (44.228.249.3)
+Host is up (0.0090s latency).
+Not shown: 99 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+6001/tcp open  X11:1
+
+# Nmap done at Wed Apr 29 13:10:23 2026 -- 1 IP address (1 host up) scanned in 16.04 seconds
+# Nmap 7.99 scan initiated Wed Apr 29 13:12:54 2026 as: nmap -p 80,443 -oN bc220210173.txt --append-output --script http-vuln-* 44.228.249.3
+# Nmap done at Wed Apr 29 13:12:57 2026 -- 1 IP address (0 hosts up) scanned in 3.54 seconds
