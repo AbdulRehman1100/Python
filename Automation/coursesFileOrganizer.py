@@ -10,8 +10,17 @@ try:
 except:
         sys.exit(f"configuration file \"{config_path.name}\" doesn't exist at path: \"{config_path.parent}\"")
 
+
 # Get all files in the target directory
-parent_dir = Path(r"C:\Users\Abdul Rehman\Downloads")
+if len(sys.argv) < 2:
+     sys.exit("Too few command-line arguments")
+if len(sys.argv) > 2:
+     sys.exit("Too many command-line arguments")
+parent_dir = Path(sys.argv[1])
+if not parent_dir.exists():
+    sys.exit(f"Path doesn't exist: {parent_dir}")
+if not parent_dir.is_dir():
+    sys.exit(f"Path is not a directory: {parent_dir}")
 files_paths = [entry for entry in parent_dir.iterdir() if entry.is_file()]
 
 # Move each file to its matching course code folder
