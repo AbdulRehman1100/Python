@@ -6,7 +6,7 @@ config_path = Path(__file__).parent / "codes.txt"
 try:
         with open(config_path) as config_file:
             valid_codes = config_file.read()
-            valid_codes = set(valid_codes.split())
+            valid_codes = set(valid_codes.upper().split())
 except:
         sys.exit(f"configuration file \"{config_path.name}\" doesn't exist at path: \"{config_path.parent}\"")
 
@@ -26,7 +26,7 @@ files_paths = [entry for entry in parent_dir.iterdir() if entry.is_file()]
 # Move each file to its matching course code folder
 for file_path in files_paths:
     for code in valid_codes:
-        if code in str(file_path.name):
+        if code in str(file_path.name).upper():
             new_folder = parent_dir / code
             new_folder.mkdir(exist_ok = True)
             file_path.rename(new_folder / file_path.name)
