@@ -34,14 +34,24 @@ def merg_pass(rectangles):
     
     return result
 
-# if __name__ == "__main__":
-#     doc = pymupdf.open("git_cheat.pdf")
-#     for page in doc:
-#         for annote in page.annots():
-#             annote.set_colors(stroke=(1, 0, 0))
-#             annote.update()
+if __name__ == "__main__":
+    doc = pymupdf.open("git_cheat.pdf")
 
-#     doc.save("output.pdf")
+    for page in doc:
+        annotation_rects = [annot.rect for annot in page.annots() if annot.type[1] == 'Highlight']
 
-test_rects = [pymupdf.Rect(0,0,50,50), pymupdf.Rect(25,25,75,75), pymupdf.Rect(200,200,300,300)]
-print(merg_pass(test_rects))
+        for annot in page.annots():
+            if annot.type[1] == 'Highlight':
+                page.delete_annot(annot)
+
+        previous_no_of_rectangles = len(annotation_rects)
+        new_rectangles = merg_pass(annotation_rects)
+        while(len(new_rectangles) != previous_no_of_rectangles):
+            previous_no_of_rectangles = len(new_rectangles)
+            new_rectangles = merg_pass(new_rectangles)
+        
+        for rect in new_rectangles:
+            annot = page.add_highlight_annot(rect)
+            annot.set_colors(stroke=(1, 1, 0))
+            annot.update()
+    doc.save("output.pdf")
