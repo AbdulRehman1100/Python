@@ -35,14 +35,11 @@ class LinkedList:
         else:
             self.current.next = new_node
             self.current = new_node
-
-ll = LinkedList()
-ll = LinkedList()
-ll.add(1)
-ll.add(2)
-ll.add(3)
-
-print(ll.head.next.data)
-print(ll.head.next.next.data)
-print(ll.head.next.next.next.data)
-print(ll.head.next.next.next.next)
+    
+    def __str__(self):
+        elements = []
+        current = self.head.next
+        while current is not None:
+            elements.append(str(current.data))
+            current = current.next
+        return " -> ".join(elements)
