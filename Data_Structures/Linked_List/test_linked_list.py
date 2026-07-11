@@ -27,3 +27,20 @@ def test_current_pointer():
     ll.add(2)
     ll.add(3)
     assert ll.current.data == 3
+    assert ll.current.next is None
+
+def test_str_empty_list():
+    ll = LinkedList()
+    assert str(ll) == ""
+
+def test_str_single_element():
+    ll = LinkedList()
+    ll.add(1)
+    assert str(ll) == "1"
+
+def test_str_multiple_elements():
+    ll = LinkedList()
+    ll.add(1)
+    ll.add(2)
+    ll.add(3)
+    assert str(ll) == "1 -> 2 -> 3"
