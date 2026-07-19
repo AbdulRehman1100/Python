@@ -84,3 +84,25 @@ def test_move_empty_list():
     
     assert result == False
     assert ll.current is None
+
+def test_find_success():
+    ll = LinkedList()
+    ll.add(1)
+    ll.add(2)
+    ll.add(3)
+    ll.add(4)
+    ll.add(5)
+    assert ll.find(3).data == 3
+
+def test_find_failure():
+    ll = LinkedList()
+    ll.add(1)
+    ll.add(2)
+    ll.add(3)
+    ll.add(4)
+    ll.add(5)
+    assert ll.find(9) is None
+
+def test_find_empty_list():
+    ll = LinkedList()
+    assert ll.find(5) is None
