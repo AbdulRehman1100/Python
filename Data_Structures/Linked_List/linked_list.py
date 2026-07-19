@@ -45,12 +45,10 @@ class LinkedList:
         return " -> ".join(elements)
     
     def move(self):
-        if self.current.next is not None:
+        if self.current is not None and self.current.next is not None:
             self.current = self.current.next
             return True
-        else:
-            self.current = None
-            return False
+        return False
     
     def find(self, value):
         current = self.head.next
