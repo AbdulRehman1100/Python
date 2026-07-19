@@ -59,3 +59,7 @@ class LinkedList:
                 return current
             current = current.next
         return None
+    
+    def start(self):
+        self.current = self.head.next
+            
