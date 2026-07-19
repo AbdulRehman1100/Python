@@ -43,3 +43,19 @@ class LinkedList:
             elements.append(str(current.data))
             current = current.next
         return " -> ".join(elements)
+    
+    def move(self):
+        if self.current.next is not None:
+            self.current = self.current.next
+            return True
+        else:
+            self.current = None
+            return False
+    
+    def find(self, value):
+        current = self.head.next
+        while current is not None:
+            if value == current.data:
+                return current
+            current = current.next
+        return None
