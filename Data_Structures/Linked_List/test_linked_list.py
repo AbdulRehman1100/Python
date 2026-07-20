@@ -106,3 +106,52 @@ def test_find_failure():
 def test_find_empty_list():
     ll = LinkedList()
     assert ll.find(5) is None
+
+def test_remove_at_start():
+    ll = LinkedList()
+    ll.add(1)
+    ll.add(2)
+    ll.add(3)
+    ll.start()  # current = Node(1)
+    assert ll.remove() ==  True
+    assert ll.current.data == 2
+
+def test_remove_at_end():
+    ll = LinkedList()
+    ll.add(1)
+    ll.add(2)
+    ll.add(3)  # current = Node(3)
+    assert ll.remove() ==  True
+    assert ll.current is None
+
+def test_remove_at_middle():
+    ll = LinkedList()
+    ll.add(1)
+    ll.add(2)
+    ll.add(3)
+    ll.start()
+    ll.move()  # current = Node(2)
+    assert ll.remove() ==  True
+    assert ll.current.data == 3
+
+def test_remove_empty_list():
+    ll = LinkedList()  # current = None
+    assert ll.remove() ==  False
+    assert ll.current is None
+
+
+def test_remove_single_element_list():
+    ll = LinkedList()
+    ll.add(1)
+    ll.start()  # current = Node(1)
+    assert ll.remove() == True
+    assert ll.current is None
+    assert str(ll) == ""
+
+def test_remove_twice():
+    ll = LinkedList()
+    ll.add(1)
+    ll.start()
+    ll.remove()  # now list is empty
+    assert ll.remove() == False  # calling remove again, shouldn't do anyting
+    assert ll.current is None
