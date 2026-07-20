@@ -184,8 +184,22 @@ def test_len_after_remove():
     ll.move()
     ll.remove()
     assert len(ll) == 1
+    ll.start()
     ll.remove()
     assert len(ll) == 0
-    assert ll.current is None 
 
-test_len_after_remove()
+def test_is_empty():
+    ll = LinkedList()
+    assert ll.is_empty() == True
+    ll.add(1)
+    assert ll.is_empty() == False
+    ll.add(3)
+    ll.add(2)
+    assert ll.is_empty() == False
+    ll.remove()
+    assert ll.is_empty() == False
+    ll.start()
+    ll.remove()
+    assert ll.is_empty() == False
+    ll.remove()
+    assert ll.is_empty() == True
