@@ -25,6 +25,7 @@ class LinkedList:
         self.head = Node()
         self.head.next = None
         self.current = None
+        self.last_current = None
     
     def add(self, value = None):
         new_node = Node(value)
@@ -32,7 +33,9 @@ class LinkedList:
         if self.head.next == None:
             self.head.next = new_node
             self.current = new_node
+            self.last_current = new_node
         else:
+            self.last_current = self.current
             self.current.next = new_node
             self.current = new_node
     
@@ -46,6 +49,7 @@ class LinkedList:
     
     def move(self):
         if self.current is not None and self.current.next is not None:
+            self.last_current = self.current
             self.current = self.current.next
             return True
         return False
@@ -60,4 +64,13 @@ class LinkedList:
     
     def start(self):
         self.current = self.head.next
+        self.last_current = self.head
+
+    def remove(self):
+        if self.current is not None:
+            self.last_current.next = self.current.next
+            self.current = self.last_current.next
+            return True
+        
+        return False
             
