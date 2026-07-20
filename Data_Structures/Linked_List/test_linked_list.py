@@ -155,3 +155,37 @@ def test_remove_twice():
     ll.remove()  # now list is empty
     assert ll.remove() == False  # calling remove again, shouldn't do anyting
     assert ll.current is None
+
+
+def test_len_single_element_list():
+    ll = LinkedList()
+    ll.add(1)
+    assert len(ll) == 1
+
+def test_len_multiple_elements_list():
+    ll = LinkedList()
+    ll.add(1)
+    ll.add(3)
+    ll.add(2)
+    assert len(ll) == 3
+
+def test_len_empty_list():
+    ll = LinkedList()
+    assert len(ll) == 0
+
+def test_len_after_remove():
+    ll = LinkedList()
+    ll.add(1)
+    ll.add(3)
+    ll.add(2)
+    ll.start()
+    ll.remove()
+    assert len(ll) == 2
+    ll.move()
+    ll.remove()
+    assert len(ll) == 1
+    ll.remove()
+    assert len(ll) == 0
+    assert ll.current is None 
+
+test_len_after_remove()
