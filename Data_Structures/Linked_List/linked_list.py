@@ -34,10 +34,11 @@ class LinkedList:
         if self.head.next == None:
             self.head.next = new_node
             self.current = new_node
-            self.last_current = new_node
+            self.last_current = self.head
         else:
-            self.last_current = self.current
+            new_node.next = self.current.next
             self.current.next = new_node
+            self.last_current = self.current
             self.current = new_node
 
         self.size += 1
@@ -86,11 +87,3 @@ class LinkedList:
             return True
         return False
     
-ll = LinkedList()
-ll.add(1)
-ll.add(2)
-ll.add(3)
-ll.start()
-ll.remove()  # Node 1 gone, current = Node 2
-ll.remove()  # Node 2 gone bina move() ke — kya sahi chalega?
-print(ll)
