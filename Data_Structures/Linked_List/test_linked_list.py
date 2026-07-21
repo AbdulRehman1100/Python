@@ -16,6 +16,16 @@ def test_add_multiple():
     assert ll.head.next.next.next.data == 3
     assert ll.head.next.next.next.next is None
 
+def test_add_after_move():
+    ll = LinkedList()
+    ll.add(10)
+    ll.add(20)
+    ll.add(30)
+    ll.start()
+    ll.move()
+    ll.add(99)
+    assert ll.current.data == 99
+
 def test_empty_list():
     ll = LinkedList()
     assert ll.head.next is None
