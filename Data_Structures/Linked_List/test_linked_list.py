@@ -1,4 +1,5 @@
 from linked_list import LinkedList
+import pytest
 
 def test_add_single():
     ll = LinkedList()
@@ -213,3 +214,56 @@ def test_is_empty():
     assert ll.is_empty() == False
     ll.remove()
     assert ll.is_empty() == True
+
+def test_insert_at_empty_list():
+    ll = LinkedList()
+    with pytest.raises(IndexError):
+        ll.insert_at(10, -1)
+    with pytest.raises(IndexError):
+        ll.insert_at(10, 1)
+
+    ll.insert_at(10, 0)
+    assert ll.current.data == 10
+    assert len(ll) == 1
+    assert ll.head.next.data == 10
+    assert ll.current.next == None
+
+def test_insert_at_front():
+    ll = LinkedList()
+    ll.add(1)
+    ll.add(3)
+    ll.add(2)
+
+    with pytest.raises(IndexError):
+        ll.insert_at(10, -1)
+    with pytest.raises(IndexError):
+        ll.insert_at(10, 4)
+
+    ll.insert_at(4,0)
+    assert ll.current.data == 2
+    assert ll.head.next.data == 4
+    assert len(ll) == 4
+    assert str(ll) == "4 -> 1 -> 3 -> 2"
+
+def test_insert_at_end():
+    ll = LinkedList()
+    ll.add(1)
+    ll.add(3)
+    ll.add(2)
+
+    ll.insert_at(4, 3)
+    assert ll.current.data == 2
+    assert str(ll) == "1 -> 3 -> 2 -> 4"
+    assert len(ll) == 4
+
+def test_insert_at_mid():
+    ll = LinkedList()
+    ll.add(1)
+    ll.add(2)
+    ll.add(3)
+    ll.add(4)
+
+    ll.insert_at(99, 2)
+    assert ll.current.data == 4
+    assert str(ll) == "1 -> 2 -> 99 -> 3 -> 4"
+    assert len(ll) == 5

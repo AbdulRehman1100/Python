@@ -87,3 +87,94 @@ class LinkedList:
             return True
         return False
     
+    def insert_at(self, value, position):
+        if position < 0 or position > self.size:
+            raise IndexError
+        
+        is_empty = self.is_empty()
+        saved_current = self.current
+        saved_last_current = self.last_current
+        
+        new_node = Node(value)
+        
+        if self.head.next is None:
+            self.head.next = new_node
+            self.last_current = self.head
+            self.current = new_node
+        else:
+            self.current = self.head
+            i = 0
+            while i < position:
+                self.last_current = self.current
+                self.current = self.current.next
+                i += 1
+            
+            self.last_current = self.current
+            new_node.next = self.current.next
+            self.current.next = new_node
+        
+        if not is_empty:
+            self.current = saved_current
+            self.last_current = saved_last_current
+        self.size += 1
+
+         
+
+# ll = LinkedList()
+# ll.add(100)
+# ll.add(200)
+# ll.add(300)
+# ll.insert_at(999, 1)
+# print(ll)  # expect: 100 -> 999 -> 200 -> 300
+
+# ll2 = LinkedList()
+# ll2.add(100)
+# ll2.add(200)
+# ll2.add(300)
+# ll2.insert_at(999, 2)
+# print(ll2)  # expect: 100 -> 200 -> 999 -> 300
+
+# ll4 = LinkedList()
+# ll4.add(100)
+# ll4.add(200)
+# ll4.add(300)
+# ll4.insert_at(500, 0)
+# print(ll4)  # expect: 100 -> 200 -> 999 -> 300
+
+# ll3 = LinkedList()
+# ll3.insert_at(999, 0)  # expect: 999
+# ll3.insert_at(500, 1)  # expect: 999
+# ll3.insert_at(33, 2)
+# print(ll3)
+
+# ll = LinkedList()
+# ll.add(100)
+# ll.add(200)
+# print(len(ll))  # expect 2
+
+# ll.insert_at(999, 1)
+# print(len(ll))  # kya expect karte ho? aur kya milta hai?
+
+# ll = LinkedList()
+# ll.add(100)
+# ll.add(200)
+# ll.add(300)
+# ll.insert_at(999, 3)
+# print(ll)  # expect: 100 -> 200 -> 300 -> 999
+
+l2 = LinkedList()
+l2.insert_at(999, 0)
+l2.add(10)
+print(l2)  # expect: 100 -> 200 -> 300 -> 999
+
+# ll = LinkedList()
+# ll.add(1)
+# ll.add(2)
+# ll.insert_at(99, 1)
+# print(ll)
+# ll.add(3)
+# print(ll)
+# ll.start()
+# ll.move()
+# ll.remove()
+# print(ll)
