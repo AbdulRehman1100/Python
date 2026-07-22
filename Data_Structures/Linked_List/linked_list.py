@@ -28,7 +28,7 @@ class LinkedList:
         self.last_current = None
         self.size = 0
     
-    def add(self, value = None):
+    def add_after_current(self, value = None):
         new_node = Node(value)
 
         if self.head.next == None:
@@ -51,7 +51,7 @@ class LinkedList:
             current = current.next
         return " -> ".join(elements)
     
-    def move(self):
+    def move_next(self):
         if self.current is not None and self.current.next is not None:
             self.last_current = self.current
             self.current = self.current.next
@@ -70,7 +70,7 @@ class LinkedList:
         self.current = self.head.next
         self.last_current = self.head
 
-    def remove(self):
+    def remove_current(self):
         if self.current is not None:
             self.last_current.next = self.current.next
             self.current = self.last_current.next
