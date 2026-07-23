@@ -130,20 +130,23 @@ class LinkedList:
         self.current = self.head
         while True:
             if not self.move_next():
+                self.current = saved_current
+                self.last_current = saved_last_current
                 return False
-            
             if self.current.data == value:
                 break
         
-        if self.current == saved_current:
-            self.remove_current()
-            return True
-
+        was_current = (self.current == saved_current)
+        
         self.last_current.next = self.current.next
-        self.current = self.last_current.next
         self.size -= 1
-
-        self.current = saved_current
-        self.last_current = saved_last_current
+        
+        if was_current:
+            self.current = None
+            self.last_current = None
+        else:
+            self.current = saved_current
+            self.last_current = saved_last_current
+        
         return True
         
