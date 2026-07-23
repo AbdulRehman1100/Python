@@ -50,26 +50,5 @@ class Stack():
 
         return " -> ".join(elements)
 
-s = Stack()
-print(s)
-print(s.is_empty())
-s.push(5)
-print(s)
-print(s.pop())
-print(s)
-print(s.is_empty())
-
-print("************")
-s.push(1)
-s.push(2)
-s.push(3)
-s.push(4)
-s.push(5)
-print(s)
-s.pop()
-s.pop()
-print(s)
-s.pop()
-s.pop()
-s.pop()
-# print(s)
+    def peek(self):
+        return self._head.data
