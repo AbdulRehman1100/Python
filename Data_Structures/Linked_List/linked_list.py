@@ -117,3 +117,31 @@ class LinkedList:
             self.current = saved_current
             self.last_current = saved_last_current
         self.size += 1
+
+    def remove_by_value(self, value):
+        if self.is_empty():
+            return False
+        
+        saved_current = self.current
+        saved_last_current = self.last_current
+        
+        self.current = self.head
+        while True:
+            if not self.move_next():
+                return False
+            
+            if self.current.data == value:
+                break
+        
+        if self.current == saved_current:
+            self.remove_current()
+            return True
+
+        self.last_current.next = self.current.next
+        self.current = self.last_current.next
+        self.size -= 1
+
+        self.current = saved_current
+        self.last_current = saved_last_current
+        return True
+        
