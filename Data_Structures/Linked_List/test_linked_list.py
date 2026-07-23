@@ -265,3 +265,37 @@ def test_insert_at_mid():
     assert ll.current.data == 4
     assert str(ll) == "1 -> 2 -> 99 -> 3 -> 4"
     assert len(ll) == 5
+
+def test_remove_by_value_success():
+    ll = LinkedList()
+    ll.add_after_current(1)
+    ll.add_after_current(2)
+    ll.add_after_current(3)
+    assert ll.remove_by_value(2) == True
+    assert str(ll) == "1 -> 3"
+    assert ll.current.data == 3
+
+def test_remove_by_value_failure():
+    ll = LinkedList()
+    ll.add_after_current(1)
+    ll.add_after_current(2)
+    ll.add_after_current(3)
+    assert ll.remove_by_value(4) == False
+    assert str(ll) == "1 -> 2 -> 3"
+    assert ll.current.data == 3
+
+def test_remove_by_value_current():
+    ll = LinkedList()
+    ll.add_after_current(1)
+    ll.add_after_current(2)
+    ll.add_after_current(3)
+    assert ll.remove_by_value(3) == True
+    assert str(ll) == "1 -> 2"
+    assert ll.current is None
+
+def test_remove_by_value_empty_list():
+    ll = LinkedList()
+    assert ll.remove_by_value(3) == False
+    assert str(ll) == ""
+    assert ll.current is None
+    assert ll.head.next is None
