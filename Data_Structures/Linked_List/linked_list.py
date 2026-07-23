@@ -35,6 +35,8 @@ class LinkedList:
             self.head.next = new_node
             self.current = new_node
             self.last_current = self.head
+        elif self.current is None:
+            raise ValueError("Cursor is not positioned. Call start() first.")
         else:
             new_node.next = self.current.next
             self.current.next = new_node
