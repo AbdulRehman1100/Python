@@ -23,15 +23,18 @@ class Node:
 class Stack():
     def __init__(self):
         self._head = None
+        self._size = 0
 
     def push(self, value):
         new_node = Node(value)
         new_node.next = self._head
         self._head = new_node
+        self._size += 1
 
     def pop(self):
         x = self._head.data
         self._head = self._head.next
+        self._size -= 1
         return x
 
     def is_empty(self):
@@ -52,3 +55,7 @@ class Stack():
 
     def peek(self):
         return self._head.data
+
+    @property
+    def size(self):
+        return self._size
