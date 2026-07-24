@@ -67,21 +67,3 @@ class Queue:
 
         elements.append("Tail")
         return " -> ".join(elements)
-
-# q = Queue()
-# q.enqueue(10)
-# q.dequeue()   # single element remove kiya, queue ab empty honi chahiye
-# q.enqueue(99)  # naya element add karo
-# print(q)
-
-q = Queue()
-q.enqueue(10)
-q.dequeue()
-q.enqueue(20)
-q.enqueue(30)
-print(q)  # expect: Head -> 20 -> 30 -> Tail
-q.dequeue()
-q.dequeue()
-print(q)  # expect: ""
-q.enqueue(99)
-print(q)  # expect: Head -> 99 -> Tail — yeh tail ko dobara test karega
