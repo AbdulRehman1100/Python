@@ -29,7 +29,7 @@ class Queue:
     def enqueue(self, value): # add new element at the end of linkedlist
         new_node = Node(value)
 
-        if self._tail is None:
+        if self._head is None:
             self._tail = new_node
             self._head = new_node
         else:
@@ -67,3 +67,21 @@ class Queue:
 
         elements.append("Tail")
         return " -> ".join(elements)
+
+# q = Queue()
+# q.enqueue(10)
+# q.dequeue()   # single element remove kiya, queue ab empty honi chahiye
+# q.enqueue(99)  # naya element add karo
+# print(q)
+
+q = Queue()
+q.enqueue(10)
+q.dequeue()
+q.enqueue(20)
+q.enqueue(30)
+print(q)  # expect: Head -> 20 -> 30 -> Tail
+q.dequeue()
+q.dequeue()
+print(q)  # expect: ""
+q.enqueue(99)
+print(q)  # expect: Head -> 99 -> Tail — yeh tail ko dobara test karega
