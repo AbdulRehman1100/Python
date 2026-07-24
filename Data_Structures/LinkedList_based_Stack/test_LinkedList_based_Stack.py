@@ -6,7 +6,7 @@ def test_push():
     s = Stack()
     s.push(10)
     assert s._head.data == 10
-    s._head.next is None
+    assert s._head.next is None
     assert str(s) == "Top -> 10"
 
     # non empty stack
@@ -20,7 +20,7 @@ def test_push():
     s.pop()
     s.push(30)
     assert s._head.data == 30
-    s._head.next is None
+    assert s._head.next is None
     assert str(s) == "Top -> 30 -> 10"
 
 
