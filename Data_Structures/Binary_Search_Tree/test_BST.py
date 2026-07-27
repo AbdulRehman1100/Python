@@ -84,3 +84,24 @@ def test_postorder():
     t.insert(10)
     t.insert(80)
     assert t.postorder() == [10, 30, 80, 70, 50]
+
+def test_search():
+    t = BST()
+    # empty BST
+    assert t.search(50) == False
+
+    t.insert(50)
+    t.insert(30)
+    t.insert(70)
+    t.insert(10)
+    t.insert(80)
+    
+    # root match
+    assert t.search(50) == True
+    # left branch match
+    assert t.search(10) == True
+    # right branch match
+    assert t.search(70) == True
+
+    # match not found
+    assert t.search(99) == False
