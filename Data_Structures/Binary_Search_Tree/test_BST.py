@@ -36,3 +36,51 @@ def test_insert_duplicate():
     assert t.insert(50) == False
     assert t.insert(30) == False
     assert t.insert(70) == False
+
+def test_preorder():
+    t = BST()
+    # empty BST
+    assert t.preorder() == []
+
+    # BST containing single node
+    t.insert(50)
+    assert t.preorder() == [50]
+
+    # BST containing multiple nodes
+    t.insert(30)
+    t.insert(70)
+    t.insert(10)
+    t.insert(80)
+    assert t.preorder() == [50, 30, 10, 70, 80]
+
+def test_inorder():
+    t = BST()
+    # empty BST
+    assert t.inorder() == []
+
+    # BST containing single node
+    t.insert(50)
+    assert t.inorder() == [50]
+
+    # BST containing multiple nodes
+    t.insert(30)
+    t.insert(70)
+    t.insert(10)
+    t.insert(80)
+    assert t.inorder() == [10, 30, 50, 70, 80]
+
+def test_postorder():
+    t = BST()
+    # empty BST
+    assert t.postorder() == []
+
+    # BST containing single node
+    t.insert(50)
+    assert t.postorder() == [50]
+
+    # BST containing multiple nodes
+    t.insert(30)
+    t.insert(70)
+    t.insert(10)
+    t.insert(80)
+    assert t.postorder() == [10, 30, 80, 70, 50]
