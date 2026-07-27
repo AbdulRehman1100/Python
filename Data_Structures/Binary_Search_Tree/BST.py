@@ -79,29 +79,18 @@ class BST:
             self._postorder_helper(node.left, result)
             self._postorder_helper(node.right, result)
             result.append(node.object)
-        
 
+    def search(self, object):
+        return self._search_helper(self._root, object)
 
-
-# t = BST()
-# t.insert(5)
-# print(t._root.object)
-# t.insert(10)
-# t.insert(4)
-# print(t._root.right.object)
-# print(t._root.left.object)
-# print(t._root.right.right)
-# print(t._root.right.left)
-# print(t._root.left.right)
-# print(t._root.left.left)
-
-t2 = BST()
-t2.insert(50)
-t2.insert(30)
-t2.insert(70)
-t2.insert(20)
-t2.insert(40)
-print(t2.preorder())
-
-print(t2.inorder())
-print(t2.postorder())
+    def _search_helper(self, node, object):
+        if node is None:
+            return False
+        elif object < node.object:
+            success = self._search_helper(node.left, object)
+        elif object > node.object:
+            success = self._search_helper(node.right, object)
+        else:
+            success = True
+            
+        return success
