@@ -47,6 +47,42 @@ class BST:
             return (node, False)
         return (node, success)
 
+    def preorder(self):
+        result = []
+        self._preorder_helper(self._root, result)
+        return result
+
+    def _preorder_helper(self, node, result):
+        if node is not None:
+            result.append(node.object)
+            self._preorder_helper(node.left, result)
+            self._preorder_helper(node.right, result)
+
+    def inorder(self):
+        result = []
+        self._inorder_helper(self._root, result)
+        return result
+
+    def _inorder_helper(self, node, result):
+        if node is not None:
+            self._inorder_helper(node.left, result)
+            result.append(node.object)
+            self._inorder_helper(node.right, result)
+
+    def postorder(self):
+        result = []
+        self._postorder_helper(self._root, result)
+        return result
+
+    def _postorder_helper(self, node, result):
+        if node is not None:
+            self._postorder_helper(node.left, result)
+            self._postorder_helper(node.right, result)
+            result.append(node.object)
+        
+
+
+
 # t = BST()
 # t.insert(5)
 # print(t._root.object)
@@ -65,7 +101,7 @@ t2.insert(30)
 t2.insert(70)
 t2.insert(20)
 t2.insert(40)
-print(t2._root.left.object)         # 30
-print(t2._root.right.object)        # 70
-print(t2._root.left.left.object)    # 20
-print(t2._root.left.right.object)   # 40
+print(t2.preorder())
+
+print(t2.inorder())
+print(t2.postorder())
