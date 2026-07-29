@@ -1,4 +1,5 @@
 from BST import BST
+import pytest
 
 def test_insert_empty_tree():
     t = BST()
@@ -105,3 +106,74 @@ def test_search():
 
     # match not found
     assert t.search(99) == False
+
+def test_search_min():
+    t = BST()
+    # empty BST
+    with pytest.raises(AttributeError):
+        t.search_min()
+
+    t.insert(50)
+    t.insert(30)
+    t.insert(70)
+    t.insert(10)
+    t.insert(80)
+
+    # non empty BST
+    assert t.search_min() == 10
+
+def test_delete_empty_BST():
+    t = BST()
+    # empty BST
+    assert t.delete(10) == False
+
+def test_delete_leaf_node():
+    t = BST()
+    t.insert(50)
+    t.insert(30)
+    t.insert(70)
+    assert t.delete(30) == True
+    assert t.inorder() == [50, 70]
+
+def test_delete_node_with_one_child():
+    t = BST()
+    t.insert(50)
+    t.insert(30)
+    t.insert(20)
+    assert t.delete(30) == True
+    assert t.inorder() == [20, 50]
+
+def test_delete_node_with_two_child():
+    t = BST()
+    t.insert(50)
+    t.insert(30)
+    t.insert(70)
+    t.insert(60)
+    t.insert(80)
+    assert t.delete(70) == True
+    assert t.inorder() == [30, 50, 60, 80]
+
+def test_delete_non_existent():
+    t = BST()
+    t.insert(50)
+    t.insert(30)
+    t.insert(70)
+    t.insert(60)
+    t.insert(80)
+    assert t.delete(99) == False
+    assert t.inorder() == [30, 50, 60, 70, 80]
+
+def test_delete_root():
+    t = BST()
+    t.insert(50)
+    assert t.delete(50) == True
+    assert t._root is None
+
+def test_delete_root_with_children():
+    t = BST()
+    t.insert(50)
+    t.insert(30)
+    t.insert(70)
+    assert t.delete(50) == True
+    assert t.inorder() == [30, 70]
+    assert t._root.object == 70  # inorder successor (min of right subtree) becomes new root
