@@ -110,7 +110,7 @@ def test_search():
 def test_search_min():
     t = BST()
     # empty BST
-    with pytest.raises(AttributeError):
+    with pytest.raises(ValueError):
         t.search_min()
 
     t.insert(50)

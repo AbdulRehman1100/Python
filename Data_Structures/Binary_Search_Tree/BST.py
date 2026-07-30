@@ -132,10 +132,12 @@ class BST:
         '''
         Return minimum object in the whole BST.
 
-        - Raises AttributeError if called upon empty tree.
+        - Raises ValueError if called upon empty tree.
         '''
+        if self._root is None:
+            raise ValueError("Cannot find minimum of an empty tree")
         return self._search_min_helper(self._root).object
-
+    
     def _search_min_helper(self, node):
         if node.left is None:
             return node
