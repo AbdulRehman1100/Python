@@ -29,10 +29,25 @@ class TreeNode:
         self._right = right_node
 
 class BST:
+    '''
+    Standard BST with insert(), delete(), preorder(), inorder(), postorder(), search() and search_min().
+
+    - Can store any type of data(homogeneous/heterogeneous)
+    - Duplicated data is not allowed.
+    - <, > and = operators must be overloaded for the user defined class otherwise TypeError will raise
+      while calling method on BST instances.
+    '''
     def __init__(self):
         self._root = None
 
     def insert(self, object):
+        '''
+        Insert the object in left subtree if object < root's object or 
+        in right subtree if object > root object's recursively.
+
+        - Duplicate object will not be insert.
+        - Return True except for duplicated data.
+        '''
         self._root, success = self._insert_helper(self._root, object)
         return success
         
@@ -48,6 +63,11 @@ class BST:
         return (node, success)
 
     def preorder(self):
+        '''
+        Return list of objects in preoreder.
+
+        - Empty list on empty tree.
+        '''
         result = []
         self._preorder_helper(self._root, result)
         return result
@@ -59,6 +79,11 @@ class BST:
             self._preorder_helper(node.right, result)
 
     def inorder(self):
+        '''
+        Return list of objects in inoreder.
+
+        - Empty list on empty tree.
+        '''
         result = []
         self._inorder_helper(self._root, result)
         return result
@@ -70,6 +95,11 @@ class BST:
             self._inorder_helper(node.right, result)
 
     def postorder(self):
+        '''
+        Return list of objects in postoreder.
+
+        - Empty list on empty tree.
+        '''
         result = []
         self._postorder_helper(self._root, result)
         return result
@@ -81,6 +111,9 @@ class BST:
             result.append(node.object)
 
     def search(self, object):
+        '''
+        Return True/False
+        '''
         return self._search_helper(self._root, object)
 
     def _search_helper(self, node, object):
@@ -96,6 +129,11 @@ class BST:
         return success
 
     def search_min(self):
+        '''
+        Return minimum object in the whole BST.
+
+        - Raises AttributeError if called upon empty tree.
+        '''
         return self._search_min_helper(self._root).object
 
     def _search_min_helper(self, node):
@@ -104,6 +142,11 @@ class BST:
         return self._search_min_helper(node.left)
 
     def delete(self, object):
+        '''
+        Delete the object in the BST if match.
+        
+        - Return False if the tree is empty (object cannot be found).
+        '''
         self._root, success = self._delete_helper(self._root, object)
         return success
 
@@ -133,31 +176,3 @@ class BST:
             success = True
 
         return (node, success)
-
-t = BST()
-t.insert(50)
-t.insert(30)
-t.insert(70)
-t.insert(60)
-t.insert(80)
-t.delete(50)  # root ke dono children hain
-print(t.inorder())
-
-t2 = BST()
-t2.insert(50)
-t2.insert(30)
-t2.insert(70)
-t2.delete(30)
-print(t2.inorder())  # expect: [50, 70]
-
-t3 = BST()
-t3.insert(50)
-t3.insert(30)
-t3.insert(20)
-t3.delete(30)
-print(t3.inorder())  # expect: [20, 50]
-
-t5 = BST()
-t5.insert(50)
-t5.delete(50)
-print(t5._root)  # expect None
