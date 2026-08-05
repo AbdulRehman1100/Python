@@ -1,7 +1,6 @@
 import random
 # TowerNode
 class Node:
-    MAX_LEVELS = 30
     def __init__(self, level_count, data = None):
         self._data = data
         self._next= [None for i in range(level_count + 1)]
@@ -24,45 +23,39 @@ class Node:
         return len(self._next)
 
 class SkipList:
+    Max_level = 30
     def __init__(self, min, max):
-        self._head = Node(0, min)
-        self._tail = Node(0, max)
-        self._head[0] = self._tail
+        self._head = Node(SkipList.Max_level, min)
+        self._tail = Node(SkipList.Max_level, max)
+
+        for level in range(len(self._head)):
+            self._head[level] = self._tail
+
+    def __search_predecessor(self, data):
+        predecessors = [None] * len(self._head)
+        current = self._head
+
+        for level in range(len(self._head) - 1, -1, -1):
+            while current[level].data < data:
+                current = current[level]
+            predecessors[level] = current
+
+        return predecessors
+
+    def __random_level(self):
+        level = 0
+        result = random.choice((0,1))
+        while result == 1 and level < SkipList.Max_level:
+            level += 1
+            result = random.choice((0,1))
+
+        return level
 
     def insert(self, data):
+        update = self.__search_predecessor(data)
+        node_height = self.__random_level()
+        new_node = Node(node_height, data)
 
-        no_of_heads = 0
-        while random.choice((0,1)) != 0:
-            no_of_heads += 1
-
-        levels = no_of_heads
-        if no_of_heads >= len(self._head):
-            no_of_levels = len(self._head) - no_of_heads
-            levels = len(self._head) + no_of_levels
-            
-        node = Node(levels, data)
-
-        current_node = self._head
-        while levels >= 0:
-            while data > current_node[levels].data:
-                current_node = current_node[levels]
-
-            if data < current_node[levels].data:
-                node[levels] = current_node[levels]
-                current_node[levels] = node
-            levels -= 1
-
-        
-
-
-# node = Node(1, 5)
-# print(node.data)
-# print(node[0])
-
-sk = SkipList(-9999, 9999)
-sk.insert(10)
-sk.insert(20)
-print(sk._head.data)
-print(sk._head[0].data)
-print(sk._head[0][0].data)
-print(sk._tail.data)
+        for level in range(node_height + 1):
+            new_node[level] = update[level][level]
+            update[level][level] = new_node
