@@ -100,3 +100,17 @@ class SkipList:
                 return current[0]
         
         return None
+
+    def remove(self, data):
+        current = self._head
+        remove_status = False
+
+        for level in range(len(self._head) - 1, -1, -1):
+            while current[level].data < data:
+                current = current[level]
+
+            if current[level].data == data:
+                current[level] = current[level][level]
+                remove_status = True
+
+        return remove_status

@@ -120,3 +120,87 @@ def test_search_failure():
     assert sk.search(1000) is None
     assert sk.search(399) is None
     assert sk.search(401) is None
+
+def test_remove_empty():
+    sk = SkipList(-9999, 9999, 5)
+
+    # remove
+    assert sk.remove(200) == False
+
+def test_remove_at_begining():
+    sk = SkipList(-9999, 9999, 5)
+    sk.insert(100)
+    sk.insert(200)
+    sk.insert(500)
+    sk.insert(400)
+    sk.insert(800)
+    sk.insert(700)
+    sk.insert(300)
+    sk.insert(900)
+    sk.insert(600)
+
+    assert sk.remove(100) == True
+    assert sk.get_level_0_items() == [200, 300, 400, 500, 600, 700, 800, 900]
+
+def test_remove_at_end():
+    sk = SkipList(-9999, 9999, 5)
+    sk.insert(100)
+    sk.insert(200)
+    sk.insert(500)
+    sk.insert(400)
+    sk.insert(800)
+    sk.insert(700)
+    sk.insert(300)
+    sk.insert(900)
+    sk.insert(600)
+
+    assert sk.remove(900) == True
+    assert sk.get_level_0_items() == [100, 200, 300, 400, 500, 600, 700, 800]
+
+def test_remove_at_middle():
+    sk = SkipList(-9999, 9999, 5)
+    sk.insert(100)
+    sk.insert(200)
+    sk.insert(500)
+    sk.insert(400)
+    sk.insert(800)
+    sk.insert(700)
+    sk.insert(300)
+    sk.insert(900)
+    sk.insert(600)
+
+    assert sk.remove(500) == True
+    assert sk.get_level_0_items() == [100, 200, 300, 400, 600, 700, 800, 900]
+
+def test_remove_at_multiple_values():
+    sk = SkipList(-9999, 9999, 5)
+    sk.insert(100)
+    sk.insert(200)
+    sk.insert(500)
+    sk.insert(400)
+    sk.insert(800)
+    sk.insert(700)
+    sk.insert(300)
+    sk.insert(900)
+    sk.insert(600)
+
+    assert sk.remove(300) == True
+    assert sk.remove(700) == True
+    assert sk.get_level_0_items() == [100, 200, 400, 500, 600, 800, 900]
+
+def test_remove_duplicate_values():
+    sk = SkipList(-9999, 9999, 5)
+    sk.insert(100)
+    sk.insert(200)
+    sk.insert(500)
+    sk.insert(800)
+    sk.insert(400)
+    sk.insert(800)
+    sk.insert(700)
+    sk.insert(300)
+    sk.insert(900)
+    sk.insert(600)
+
+    assert sk.remove(800) == True
+    assert sk.remove(800) == True
+    assert sk.get_level_0_items() == [100, 200, 300, 400, 500, 600, 700, 900]
