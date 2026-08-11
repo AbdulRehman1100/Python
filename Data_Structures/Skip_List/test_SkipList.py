@@ -82,3 +82,41 @@ def test_insert_duplicates():
     sk.insert(600)
 
     assert sk.get_level_0_items() == [100, 100, 200, 300, 400, 500, 600, 600, 700]
+
+def test_search_empty():
+    sk = SkipList(-9999, 9999, 5)
+    assert sk.search(99) is None
+
+def test_search_success():
+    sk = SkipList(-9999, 9999, 5)
+    sk.insert(100)
+    sk.insert(200)
+    sk.insert(500)
+    sk.insert(400)
+    sk.insert(800)
+    sk.insert(700)
+    sk.insert(300)
+    sk.insert(900)
+    sk.insert(600)
+
+    assert sk.search(100).data == 100
+    assert sk.search(500).data == 500
+    assert sk.search(900).data == 900
+
+def test_search_failure():
+    sk = SkipList(-9999, 9999, 5)
+    sk.insert(100)
+    sk.insert(200)
+    sk.insert(500)
+    sk.insert(400)
+    sk.insert(800)
+    sk.insert(700)
+    sk.insert(300)
+    sk.insert(900)
+    sk.insert(600)
+
+    assert sk.search(99) is None
+    assert sk.search(450) is None
+    assert sk.search(1000) is None
+    assert sk.search(399) is None
+    assert sk.search(401) is None

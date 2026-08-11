@@ -88,3 +88,15 @@ class SkipList:
             elements.append(current.data)
 
         return elements
+
+    def search(self, data):
+        current = self._head
+
+        for level in range(len(self._head) - 1, -1, -1):
+            while current[level].data < data:
+                current = current[level]
+
+        if current[0].data == data:
+                return current[0]
+        
+        return None
