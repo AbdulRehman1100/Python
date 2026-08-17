@@ -1,4 +1,7 @@
 def is_prime(number):
+    '''
+    Return whether an integer is a prime number or not.
+    '''
     if not isinstance(number, int):
         raise TypeError("number must be an integer")
     
