@@ -1,4 +1,4 @@
-from is_pime import is_prime
+from is_prime import is_prime
 import pytest
 
 def test_is_prime_none_integer():
