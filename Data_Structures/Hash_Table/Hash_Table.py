@@ -47,3 +47,12 @@ class HashTable:
             node.data = data
         else:
             node.next = Node(key, data) # append new key, data pair at end
+
+    def get(self, key):
+        index = hash(key) % self._table_size
+        node = self._table[index]
+        while node is not None:
+            if node.key == key:
+                return node.data
+            node = node.next
+        return None
