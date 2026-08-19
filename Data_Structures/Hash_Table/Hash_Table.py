@@ -56,3 +56,17 @@ class HashTable:
                 return node.data
             node = node.next
         return None
+
+    def remove(self, key):
+        index = hash(key) % self._table_size
+
+        node = self._table[index]
+        prev_node = node # faciliate the delete
+        while node.key != key and node.next is not None: # traverse to either matching key node or end of the list
+                   prev_node = node
+                   node = node.next
+
+        if node.key == key:
+            prev_node.next = node.next
+            return True
+        return False
