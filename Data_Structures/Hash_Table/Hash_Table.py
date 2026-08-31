@@ -32,6 +32,13 @@ class Node:
 
 
 class HashTable:
+    '''
+    Standard hash table with add(), remove(), get() methods.
+    - Takes mandatory size argument while intilization.
+    - If size is not a prime number, then size will automatically be the next prime number for the given number.
+    - Raises TypeError if size not a integer
+    - Raises ValueError if size non positive
+    '''
     def __init__(self, size):
         if type(size) != int:
             raise TypeError("Table size must be an integer")
@@ -42,6 +49,12 @@ class HashTable:
         self._table = [Node() for _ in range(self._table_size)] # dummy header node(key=None, data=None) list
 
     def add(self, key, data):
+        '''
+        Add the key, data pair in the table.
+        - Duplicate keys not allowed.
+        - Update only only data if key alreay exist.
+        - Raises TypeError for key = None.
+        '''
         if key is None:
             raise TypeError("Key can't be None")
         
@@ -56,6 +69,11 @@ class HashTable:
             node.next = Node(key, data) # append new key, data pair at end
 
     def get(self, key):
+        '''
+        Return the associate with provided key.
+        - Return None for non existent key in the table.
+        - Raises TypeError for key = None.
+        '''
         if key is None:
             raise TypeError("Key can't be None")
         
@@ -68,6 +86,10 @@ class HashTable:
         return None
 
     def remove(self, key):
+        '''
+        Remove key and associate data from the table.
+        - Raises TypeError for key = None.
+        '''
         if key is None:
             raise TypeError("Key can't be None")
         
