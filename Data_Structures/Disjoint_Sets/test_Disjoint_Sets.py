@@ -10,6 +10,14 @@ def test_find_after_union():
     ds.union(0, 1)
     assert ds.find(1) == ds.find(0)
 
+def test_find_path_compression():
+    ds = DisjointSets(5)
+    ds._parent = [1, 2, 3, 4, -4]
+
+    ds.find(0)
+    for i in range(4):
+        assert ds._parent[i] == 4
+
 def test_union_connects_elements():
     ds = DisjointSets(5)
     ds.union(0, 1)
