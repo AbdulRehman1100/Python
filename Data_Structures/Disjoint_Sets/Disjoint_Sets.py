@@ -7,23 +7,27 @@ class DisjointSets:
             x = self._parent[x]
         return x
 
+    # union by size/weight
     def union(self, x, y):
         root_x = self.find(x)
         root_y = self.find(y)
         if root_x != root_y:
-            self._parent[root_y] = root_x
-        return root_x
+            if self._parent[root_x] <= self._parent[root_y]:
+                self._parent[root_x] += self._parent[root_y]
+                self._parent[root_y] = root_x
+                return root_x
+            else:
+                self._parent[root_y] += self._parent[root_x]
+                self._parent[root_x] = root_y
+                return root_y
 
     def connected(self, x, y):
         return self.find(x) == self.find(y)
 
-# ds = DisjointSets(5)
-# print(ds.find(0))  # expect 0
-# print(ds.find(3))  # expect 3
 
 ds = DisjointSets(5)
-print(ds.find(0))  # 0
-print(ds.find(1))  # 1
 ds.union(0, 1)
-print(ds.find(0))  # ?
-print(ds.find(1))  # ?
+ds.union(0, 2)  # ab set {0,1,2} ka size 3 hai, root 0
+ds.union(3, 4)  # set {3,4} ka size 2 hai, root 3
+
+print(ds.union(0, 3))  # bada set (size 3) aur chhota set (size 2) ko union karo
