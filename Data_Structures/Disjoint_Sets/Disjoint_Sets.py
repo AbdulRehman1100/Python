@@ -45,6 +45,8 @@ class DisjointSets:
                 self._parent[root_y] += self._parent[root_x]
                 self._parent[root_x] = root_y
                 return root_y
+    
+        return root_x  # already same set, return existing common root
 
     def connected(self, x, y):
         self._validate_element(x)
