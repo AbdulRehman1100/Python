@@ -14,9 +14,30 @@ class MinHeap:
             hole = hole//2
         self._array[hole] = x
 
+    def _percolate_down(self, hole):
+        temp = self._array[hole]
+
+        while hole * 2 <= self._current_size:
+            child = hole * 2
+            if child != self._current_size and self._array[child + 1] < self._array[child]:
+                child += 1
+            if self._array[child] < temp:
+                self._array[hole] = self._array[child]
+                hole = child
+            else:
+                break
+        self._array[hole] = temp
+
+    def extract_min(self):
+        min_item = self._array[1]
+        self._array[1] = self._array[self._current_size]
+        self._current_size -= 1
+        self._percolate_down(1)
+        return min_item
+
 h = MinHeap()
 h.insert(10)
 h.insert(5)
 h.insert(20)
-h.insert(3)
+print(h.extract_min())
 print(h._array[1:h._current_size+1])
