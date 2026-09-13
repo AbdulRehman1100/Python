@@ -42,3 +42,15 @@ def test_is_empty():
     assert h.is_empty() == False
     h.extract_min()
     assert h.is_empty() == True
+
+def test_build_heap():
+    h = MinHeap()
+    h.build_heap([10, 5, 20, 3, 7, 1, 15]) 
+
+    assert h.extract_min() == 1
+    assert h.extract_min() == 3
+    assert h.extract_min() == 5
+    assert h.extract_min() == 7
+    assert h.extract_min() == 10
+    assert h.extract_min() == 15
+    assert h.extract_min() == 20

@@ -37,3 +37,19 @@ class MinHeap:
 
     def is_empty(self):
         return self._current_size == 0
+
+    def build_heap(self, array):
+        for i in range(len(array)):
+            self._array[i+1] = array[i]
+
+        self._current_size = len(array)
+        i = len(array)//2
+        while i > 0:
+            self._percolate_down(i)
+            i -= 1
+
+h = MinHeap()
+h.build_heap([10, 5, 20, 3, 7, 1, 15])
+print(h.extract_min())  # expect 1
+print(h.extract_min())  # expect 3
+print(h.extract_min())  # expect 5
