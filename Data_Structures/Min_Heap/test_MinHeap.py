@@ -54,3 +54,17 @@ def test_build_heap():
     assert h.extract_min() == 10
     assert h.extract_min() == 15
     assert h.extract_min() == 20
+
+def test_resize_on_insert():
+    h = MinHeap(capacity=2)
+    h.insert(10)
+    h.insert(5)
+    h.insert(3)  # yeh resize trigger karega
+    assert h.extract_min() == 3
+    assert h.extract_min() == 5
+    assert h.extract_min() == 10
+
+def test_resize_on_build_heap():
+    h = MinHeap(capacity=3)
+    h.build_heap([10, 5, 20, 3, 7, 1, 15, 8])
+    assert h.extract_min() == 1

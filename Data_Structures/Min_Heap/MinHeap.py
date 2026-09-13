@@ -5,6 +5,9 @@ class MinHeap:
         self._current_size = 0
 
     def insert(self, x):
+        if self._current_size == self._capacity:
+            self._resize()
+
         self._current_size += 1
         hole = self._current_size
 
@@ -39,6 +42,9 @@ class MinHeap:
         return self._current_size == 0
 
     def build_heap(self, array):
+        while len(array) > self._capacity:
+            self._resize()
+
         for i in range(len(array)):
             self._array[i+1] = array[i]
 
@@ -48,8 +54,14 @@ class MinHeap:
             self._percolate_down(i)
             i -= 1
 
-h = MinHeap()
-h.build_heap([10, 5, 20, 3, 7, 1, 15])
+    def _resize(self):
+        self._capacity *= 2
+        new_array = [None] * (self._capacity + 1)
+        for i in range(1, self._current_size + 1):
+            new_array[i] = self._array[i]
+        self._array = new_array
+
+h = MinHeap(capacity=3)
+h.build_heap([10, 5, 20, 3, 7, 1, 15, 8])  # 8 elements, capacity sirf 3
 print(h.extract_min())  # expect 1
-print(h.extract_min())  # expect 3
-print(h.extract_min())  # expect 5
+print(len(h._array))    # confirm capacity badh gayi
