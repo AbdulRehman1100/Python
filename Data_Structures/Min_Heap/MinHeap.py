@@ -35,9 +35,5 @@ class MinHeap:
         self._percolate_down(1)
         return min_item
 
-h = MinHeap()
-h.insert(10)
-h.insert(5)
-h.insert(20)
-print(h.extract_min())
-print(h._array[1:h._current_size+1])
+    def is_empty(self):
+        return self._current_size == 0
