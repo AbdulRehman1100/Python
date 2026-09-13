@@ -1,4 +1,5 @@
 from MinHeap import MinHeap
+import pytest
 
 def test_insert_and_extract_sorted_order():
     h = MinHeap()
@@ -42,6 +43,11 @@ def test_is_empty():
     assert h.is_empty() == False
     h.extract_min()
     assert h.is_empty() == True
+
+def test_extract_min_empty_heap():
+    h = MinHeap()
+    with pytest.raises(IndexError):
+        h.extract_min()
 
 def test_build_heap():
     h = MinHeap()

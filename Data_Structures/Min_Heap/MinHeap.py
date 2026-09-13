@@ -1,5 +1,10 @@
 class MinHeap:
     def __init__(self, capacity = 100):
+        if type(capacity) is not int:
+            raise TypeError("Capacity must be an integer")
+        if capacity < 1:
+            raise ValueError("Capacity must be positive")
+        
         self._capacity = capacity
         self._array = [None] * (capacity + 1)
         self._current_size = 0
@@ -32,6 +37,9 @@ class MinHeap:
         self._array[hole] = temp
 
     def extract_min(self):
+        if self._current_size == 0:
+            raise IndexError("Cannot extract from an empty heap")
+        
         min_item = self._array[1]
         self._array[1] = self._array[self._current_size]
         self._current_size -= 1
@@ -60,8 +68,3 @@ class MinHeap:
         for i in range(1, self._current_size + 1):
             new_array[i] = self._array[i]
         self._array = new_array
-
-h = MinHeap(capacity=3)
-h.build_heap([10, 5, 20, 3, 7, 1, 15, 8])  # 8 elements, capacity sirf 3
-print(h.extract_min())  # expect 1
-print(len(h._array))    # confirm capacity badh gayi
