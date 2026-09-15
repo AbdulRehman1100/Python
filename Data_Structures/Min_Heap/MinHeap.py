@@ -14,13 +14,11 @@ class MinHeap:
             self._resize()
 
         self._current_size += 1
+        self._array[self._current_size] = x
         hole = self._current_size
 
         # heapify the hole up
-        while hole > 1 and x < self._array[hole//2]:
-            self._array[hole] = self._array[hole//2]
-            hole = hole//2
-        self._array[hole] = x
+        self._percolate_up(hole)
 
     def _percolate_down(self, hole):
         temp = self._array[hole]
@@ -68,3 +66,16 @@ class MinHeap:
         for i in range(1, self._current_size + 1):
             new_array[i] = self._array[i]
         self._array = new_array
+
+    def get_min(self):
+        if self._current_size == 0:
+            raise IndexError("Cannot extract from an empty heap")
+        return self._array[1]
+
+    def _percolate_up(self, hole):
+        temp = self._array[hole]
+
+        while hole > 1 and temp < self._array[hole//2]:
+            self._array[hole] = self._array[hole//2]
+            hole = hole//2 
+        self._array[hole] = temp
