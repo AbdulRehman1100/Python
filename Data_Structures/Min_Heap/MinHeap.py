@@ -79,3 +79,43 @@ class MinHeap:
             self._array[hole] = self._array[hole//2]
             hole = hole//2 
         self._array[hole] = temp
+
+    def decrease_key(self, index, delta):
+        if index <= 0:
+            raise IndexError("Index must be positive")
+        if index > self._current_size:
+             raise IndexError("Index out of range")
+        
+        if delta < 0:
+            raise ValueError("Delta must be non-negative")
+        self._array[index] -= delta
+        self._percolate_up(index)
+
+    def increase_key(self, index, delta):
+        if index <= 0:
+            raise IndexError("Index must be positive")
+        if index > self._current_size:
+             raise IndexError("Index out of range")
+        
+        if delta < 0:
+            raise ValueError("Delta must be non-negative")
+        self._array[index] += delta
+        self._percolate_down(index)
+
+    def remove(self, index):
+        if index <= 0:
+            raise IndexError("Index must be positive")
+        if index > self._current_size:
+             raise IndexError("Index out of range")
+
+        self._array[index] = self._array[self._current_size]
+        self._current_size -= 1
+        self._percolate_down(index)
+
+h2 = MinHeap()
+h2.insert(10)
+h2.insert(20)
+h2.insert(30)
+h2.insert(40)
+h2.insert(50)
+print(h2._array[1:6])
