@@ -112,10 +112,6 @@ class MinHeap:
         self._current_size -= 1
         self._percolate_down(index)
 
-h2 = MinHeap()
-h2.insert(10)
-h2.insert(20)
-h2.insert(30)
-h2.insert(40)
-h2.insert(50)
-print(h2._array[1:6])
+    @property
+    def current_size(self):
+        return self._current_size
