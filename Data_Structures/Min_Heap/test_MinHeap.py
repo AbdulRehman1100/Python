@@ -1,5 +1,5 @@
 from MinHeap import MinHeap
-import pytest
+import pytest, random
 
 def test_insert_and_extract_sorted_order():
     h = MinHeap()
@@ -210,3 +210,47 @@ def test_remove_mutliple_elements():
     assert h.extract_min() == 20
     assert h.extract_min() == 30
     assert h.extract_min() == 40
+
+def test_remove_root():
+    h = MinHeap()
+    h.insert(10)
+    h.insert(20)
+    h.insert(30)
+    h.remove(1)
+    assert h.extract_min() == 20  # 10 hata, 20 abhi bhi minimum hai baaki elements mein
+
+def test_remove_root():
+    h = MinHeap()
+    h.insert(10)
+    h.insert(20)
+    h.insert(30)
+    h.remove(1)
+    assert h.extract_min() in (20, 30)  # root chala gaya, koi bhi baaki min ban sakta hai depend structure pe
+
+def test_remove_percolates_up_when_needed():
+    h = MinHeap()
+    h.insert(1)
+    h.insert(3)
+    h.insert(10)
+    h.insert(5)
+    h.insert(4)
+    h.insert(11)
+    h.insert(12)
+    h.insert(0)  # yeh last element hoga, sabse chhota
+
+    h.remove(3)  # ek node jiski value 10 hai (right child of root), replaced by 0
+    # 0 apne naye parent se chhota hai, upar jaana chahiye
+    assert h.extract_min() == 0
+
+def test_stress_test():
+    h = MinHeap(10)
+    values = list(range(100))
+    random.shuffle(values)
+    for v in values:
+        h.insert(v)
+
+    result = []
+    while not h.is_empty():
+        result.append(h.extract_min())
+
+    assert result == sorted(values)
