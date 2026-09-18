@@ -2,10 +2,10 @@ class MinHeap:
     '''
     Standard MinHeap with insert(), build_heap(), remove(), extract_min(), get_min(), is_empty(), decrease_key, increase_key and read only current_size property.
 
-    - __lt__ method must defined for the user defined class otherwise raises TypeError
+    - __lt__ method must defined for the user defined class otherwise raises TypeError.
     - 1-based indexed, means indexes ranges from 1 to current size.
     - Heap will resize by 2 * current capacity if current capacity == current size on insert.
-    - Similarly, heap will reize  2 current capacity if current capacity < size of input array.
+    - Similarly, heap will reize 2 * current capacity if current capacity < size of input array.
     '''
     def __init__(self, capacity = 100):
         '''
